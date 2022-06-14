@@ -50,5 +50,26 @@ namespace NunitWebDriverTest
             //Assert
             Assert.AreEqual(expectedTitle, driver.Title);
         }
+
+        [Test]
+        public void Test_AsserSearchTitle()
+        {
+            driver.FindElement(By.CssSelector(".header-search-dropdown-link .fa-search")).Click();
+
+
+
+            var searchBox = driver.FindElement(By.CssSelector(".container > form #search-input"));
+            searchBox.Click();
+            searchBox.SendKeys("QA");
+            searchBox.SendKeys(Keys.Enter);
+
+            var resultField = driver.FindElement(By.CssSelector(".search-title")).Text;
+
+            var expectedValue = "Резултати от търсене на “QA”";
+
+            Assert.That(resultField, Is.EqualTo(expectedValue));
+
+
+        }
     }
 }
